@@ -76,5 +76,8 @@ At the end, root folder should have below files;
 - `from smtplib import SMTP` - To access SMTP to send emails
 - `from email.mime.text import MIMEText` - To format so can use subject, etc
 
+## Contributions
+Contributions to this repo are welcome. If you find a bug or have a suggestion for improvement, please open an issue on the repository. If you would like to make changes to the code, feel free to submit a pull request.
+
 ## Disclaimer
 This personal assistant is a basic implementation and may not have the full functionality of a commercial product. Use it at your own risk.

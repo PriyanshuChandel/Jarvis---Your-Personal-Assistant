@@ -1,46 +1,25 @@
-"""
-This program can do following
-1. Can open any site asked by user using default browser
-2. It can tell you current time
-3. It can launch most of the installed application but user need to speak full name of application
-4. It can play audio from the specified path
-5. It can send email to email address from the contact list.
-
-Can be Improved
-1. Add Some mechanism so admin user can able to decrypt update and encrypt again
-2. Also try to encrypt contact list  and do same as point 1 for this as well
-
-Note:
-At github the version released does not have encryption decryption.
-"""
-
-# decrypting the email id password and other user details
 from cryptography.fernet import Fernet
-
 key = Fernet(open('key.key', 'rb').read())
 decrypt = key.decrypt(open('configuration_encrypted.csv', 'rb').read()).decode().replace('\r\n', ',')
 data = decrypt.split(',')
-# Reading contacts and building the dict of name and email id
 EmailFile = open('contacts.csv', 'r').readlines()
 UserDatabase = {}
 for user_and_email in EmailFile:
     UserDatabase[user_and_email.split(',')[0].lower().strip()] = user_and_email.split(',')[1].strip()
 
-import datetime  # To check current time
-from time import sleep  # To manage sleep
-from pyttsx3 import init  # To use sapi and its properties to get list of installed voices
-from speech_recognition import Recognizer, Microphone  # To use voice engine to recognize voice
-from webbrowser import open  # To access browser
-from os import listdir, startfile, path  # To use system properties
-from random import randint  # To generate random number
-from subprocess import Popen, PIPE, STDOUT  # To run window commands
-from smtplib import SMTP  # To access SMTP to send emails
-from email.mime.text import MIMEText  # To format so can use subject, etc
+import datetime
+from time import sleep
+from pyttsx3 import init
+from speech_recognition import Recognizer, Microphone
+from webbrowser import open
+from os import listdir, startfile, path
+from random import randint
+from subprocess import Popen, PIPE, STDOUT
+from smtplib import SMTP
+from email.mime.text import MIMEText
 
 engine = init('sapi5')
 voices = engine.getProperty('voices')
-# print(voices)  # It will show you all the available voices
-# print(voices[2].id) # it will show you the id of voice like david, jeera etc
 engine.setProperty('voice', voices[2].id)
 
 
@@ -61,12 +40,11 @@ def wishme(name):
 
 
 def takeCommand():
-    """It takes microphone input from user and return string output"""
     r = Recognizer()
     with Microphone() as source:
         print('Listening...')
         r.adjust_for_ambient_noise(source)
-        r.pause_threshold = 1  # It is required to modify so user can take 1 seconds between two words he speaks
+        r.pause_threshold = 1  
         audio = r.listen(source)
     try:
         print("Recognizing...")

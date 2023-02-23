@@ -1,0 +1,5 @@
+﻿--Remove thisline, update below details and create encrypted file with name configuration_encrypted.csv and copy it the root folder
+Name,enter your name
+Email,enter your email
+Password,enter your password
+audio,enter the audio path of your PC
